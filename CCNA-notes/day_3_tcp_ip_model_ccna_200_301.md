@@ -73,8 +73,6 @@
 
 ## 5. Layer 1 – Physical Layer
 
-![Physical Layer Context](./images/TCP%20IP%20Model%20diagram.png)
-
 - Sends and receives **bits** as electrical, optical, or radio signals
 - Defines:
   - Cables and connectors
