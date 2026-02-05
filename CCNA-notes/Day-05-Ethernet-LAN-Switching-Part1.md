@@ -220,4 +220,3 @@ Common values:
 - Unknown unicast → **Flood**
 - Known unicast → **Forward**
 - Dynamic MAC entries age out after **5 minutes**
-```
