@@ -221,5 +221,3 @@ Common values:
 - Known unicast → **Forward**
 - Dynamic MAC entries age out after **5 minutes**
 ```
-
----
