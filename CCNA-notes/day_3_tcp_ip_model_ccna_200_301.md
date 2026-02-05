@@ -1,335 +1,266 @@
-````md
-# Day 4 – CLI Basics & Configuration (CCNA 200-301)
+# Day 3 – TCP/IP Model (CCNA 200-301)
 
 ---
 
-## 1. Console Port and CLI Access
+## 1. A Bit of History
 
-Network devices such as **routers and switches** are managed using a **Command Line Interface (CLI)**.
+- Early work on computer networks that evolved into today’s Internet began in the **1960s**.
+- The **US Department of Defense** funded **ARPANET**, which came online in **1969**, connecting universities and research labs.
+- ARPANET initially used **NCP (Network Control Program)**.
 
-- The CLI allows administrators to:
-  - Configure the device
-  - Monitor its status
-  - Troubleshoot issues
-- The CLI is accessed through the **console port**, especially during:
-  - Initial setup
-  - Password recovery
-  - When the network is down (out-of-band management)
+### Birth of TCP/IP
+- **Vint Cerf** and **Bob Kahn** (DARPA) began developing **TCP** in **1974**.
+- TCP was later split into two protocols still used today:
+  - **Transmission Control Protocol (TCP)**
+  - **Internet Protocol (IP)**
+- Together, they form the **TCP/IP protocol suite**.
+- ARPANET fully switched to TCP/IP on **January 1, 1983**.
 
-![Console Port or CLI](./images/Console%20Port%20or%20CLI.png)
-
----
-
-## 2. Rollover Cable
-
-A **rollover cable** is used to connect a PC to a network device’s **console port**.
-
-- Also called a **console cable**
-- Pin layout is reversed (pin 1 ↔ pin 8)
-- Not used for data traffic
-- Used only for device management
-
-![Rollover cable](./images/Rollover%20cable.png)
+### Why TCP/IP Won
+- Open standards (not vendor-proprietary)
+- Any vendor could implement them
+- Could run over many different types of networks
 
 ---
 
-## 3. CLI Modes Overview
+## 2. Who Defines Networking Standards?
 
-Cisco IOS uses different **modes** to separate user access and configuration levels.
+### IEEE (Institute of Electrical and Electronics Engineers)
+- Develops many **LAN technologies**:
+  - **Ethernet (802.3)**
+  - **Wi‑Fi (802.11)**
 
-| Prompt | Mode | Description |
-|------|------|------------|
-| `Router>` | User EXEC | Limited monitoring |
-| `Router#` | Privileged EXEC | Full monitoring, access to config |
-| `Router(config)#` | Global Configuration | Device configuration |
-
----
-
-## 4. User EXEC Mode
-
-- Default mode when you first access the device
-- Very limited commands
-- Used mainly to:
-  - Test connectivity
-  - View basic status
-
-Prompt:
-```text
-Router>
-````
+### IETF (Internet Engineering Task Force)
+- Open community defining **Internet protocols**:
+  - TCP, IP, UDP, HTTP, DNS, etc.
+- Publishes standards as **RFCs (Requests for Comments)**
 
 ---
 
-## 5. Privileged EXEC Mode
+## 3. Why Layered Models?
 
-Entered from User EXEC mode using:
+- Networks perform many different jobs:
+  - Physical transmission
+  - Local delivery
+  - Routing between networks
+  - End‑to‑end communication
+  - Applications
 
-```text
-Router> enable
-```
+### Layered Model Concept
+- Related tasks are grouped into **layers**
+- Each layer:
+  - Has a **specific role**
+  - Uses services of the layer below
+  - Provides services to the layer above
 
-Prompt changes to:
-
-```text
-Router#
-```
-
-### Capabilities
-
-* View full configuration
-* Reload the device
-* Save configuration
-* Enter configuration modes
-
-This mode is usually **password protected**.
+> A model is a **description**, not a law. Different sources may use 4‑layer, 5‑layer, or 7‑layer models.
 
 ---
 
-## 6. Global Configuration Mode
+## 4. TCP/IP 5‑Layer Model Overview
 
-Entered from Privileged EXEC mode using:
+![TCP/IP Model](./images/TCP%20IP%20Model%20diagram.png)
 
-```text
-Router# configure terminal
-```
-
-or
-
-```text
-Router# conf t
-```
-
-Prompt:
-
-```text
-Router(config)#
-```
-
-### Purpose
-
-* Configure system-wide settings
-* Configure passwords, interfaces, routing, etc.
+| Layer | Name | Purpose |
+|-----|-----|--------|
+| 5 | Application | Network services for applications |
+| 4 | Transport | Process‑to‑process communication |
+| 3 | Internet | Host‑to‑host delivery across networks |
+| 2 | Local Network | Hop‑to‑hop delivery (MAC addresses) |
+| 1 | Physical | Bits on the wire |
 
 ---
 
-## 7. Enable Password
+## 5. Layer 1 – Physical Layer
 
-Used to protect access to **Privileged EXEC mode**.
+- Sends and receives **bits** as electrical, optical, or radio signals
+- Defines:
+  - Cables and connectors
+  - Signal levels
+  - Link speeds
 
-```text
-Router(config)# enable password CCNA
-```
+### Examples
+- Copper UTP cables
+- Fiber‑optic cables
+- Wi‑Fi radios and antennas
+- Network Interface Cards (NICs)
 
-### Characteristics
-
-* Stored in **clear text** by default
-* Case-sensitive
-* Weak security
-* Can be encrypted using `service password-encryption`
+> Network engineers usually don’t need deep signal‑level knowledge.
 
 ---
 
-## 8. Enable Secret (Recommended)
+## 6. Layer 2 – Local Network Layer
 
-```text
-Router(config)# enable secret Cisco
-```
+- Provides **hop‑to‑hop delivery** within a local network
+- A **hop** is movement from one host/router to the next
+- **Switches don’t count as hops** (they extend the LAN)
+
+### Addressing
+- Uses **MAC (Media Access Control) addresses**
+- Example path:
+  - PC → R1 (MAC of R1)
+  - R1 → R2 (MAC of R2)
+  - R2 → Server (MAC of server)
+
+### Protocols
+- Ethernet (IEEE 802.3)
+- Wi‑Fi (IEEE 802.11)
+
+---
+
+## 7. Layer 3 – Internet Layer
+
+- Provides **end‑to‑end delivery across multiple networks**
+- Uses **IP addresses** to identify hosts
+- Routers operate mainly at this layer
+
+### Example
+- PC sends data to **SRV1’s IP address (10.1.1.1)**
+- Routers forward packets based on destination IP
+
+### Protocols
+- IP (IPv4, IPv6)
+- ICMP
+
+---
+
+## 8. Layer 4 – Transport Layer
+
+- Provides **process‑to‑process communication**
+- Uses **port numbers**
 
 ### Key Points
+- Runs mainly on **end hosts**, not routers
+- Identifies which application should receive the data
 
-* Always encrypted
-* Uses **Type 5 (MD5) hashing**
-* More secure than enable password
-* If both are configured, **enable secret is used**
+### Protocols
+- **TCP** – reliable, ordered, congestion‑controlled
+- **UDP** – simple, fast, no reliability
 
----
-
-## 9. Service Password Encryption
-
-```text
-Router(config)# service password-encryption
-```
-
-### Effects
-
-* Encrypts:
-
-  * Existing passwords
-  * Future passwords
-* Uses **Type 7 encryption**
-* Does **NOT** affect enable secret
-
-⚠️ Type 7 encryption is **reversible** and should not be considered secure.
+### Example
+- Web traffic → **Port 80**
+- FTP → **Port 21**
 
 ---
 
-## 10. Disabling Service Password Encryption
+## 9. Layer 5 – Application Layer
 
-```text
-Router(config)# no service password-encryption
-```
+- Where **applications meet the network**
+- Defines how data is formatted and interpreted
 
-* Already encrypted passwords remain encrypted
-* New passwords are stored in clear text
-* Enable secret is unaffected
+### Examples
+- HTTP / HTTPS (web browsing)
+- FTP / TFTP (file transfer)
+- SMTP, POP3, IMAP (email)
 
----
-
-## 11. Canceling (Removing) Commands
-
-Cisco IOS uses the `no` keyword to remove configurations.
-
-```text
-Router(config)# no service password-encryption
-```
-
-General format:
-
-```text
-Router(config)# no <command>
-```
+> Network devices don’t care about application data — only end hosts do.
 
 ---
 
-## 12. Running vs Startup Configuration
+## 10. Encapsulation and Decapsulation
 
-### Running Configuration
+![Encapsulation Diagram](./images/Encapsulation%20diagram.png)
 
-* Active configuration
-* Stored in **RAM**
-* Lost on reboot
+### Encapsulation (Sender)
+1. Application creates **data**
+2. Transport layer adds **L4 header**
+3. Internet layer adds **L3 header**
+4. Local Network layer adds **L2 header + trailer**
+5. Physical layer sends bits
 
-```text
-Router# show running-config
-```
-
----
-
-### Startup Configuration
-
-* Saved configuration
-* Stored in **NVRAM**
-* Loaded when the device restarts
-
-```text
-Router# show startup-config
-```
+### Decapsulation (Receiver)
+- Reverse process: headers removed layer by layer
 
 ---
 
-## 13. Saving the Configuration
+## 11. Protocol Data Units (PDUs)
 
-To prevent configuration loss after reboot:
+### Segment / Datagram (Layer 4)
+![Segment or Datagram](./images/Segment%20or%20Datagram%20diagram.png)
 
-```text
-Router# write
-```
+- TCP → Segment
+- UDP → Datagram
+- Payload = application data
 
-or
+### Packet (Layer 3)
+![Packet](./images/Packet%20diagram.png)
 
-```text
-Router# write memory
-```
+- Payload = segment or datagram
 
-or
+### Frame (Layer 2)
+![Frame](./images/Frame%20diagram.png)
 
-```text
-Router# copy running-config startup-config
-```
-
-All commands perform the **same function**.
+- Payload = packet
+- Actually sent over the wire
 
 ---
 
-## 14. Executing EXEC Commands from Config Mode
+## 12. Adjacent‑Layer Interaction
 
-```text
-Router(config)# do show running-config
-```
+- Each layer:
+  - Is **serviced by the layer below**
+  - **Provides service to the layer above**
 
-* Allows EXEC-level commands without exiting configuration mode
-
----
-
-## 15. Modes Review
-
-| Prompt            | Mode                 |
-| ----------------- | -------------------- |
-| `Router>`         | User EXEC            |
-| `Router#`         | Privileged EXEC      |
-| `Router(config)#` | Global Configuration |
+### Examples
+- L4 → L5: Delivers data to correct application (ports)
+- L3 → L4: Delivers data to correct host (IP)
+- L2 → L3: Delivers data to next hop (MAC)
+- L1 → L2: Sends signals
 
 ---
 
-## 16. Command Review
+## 13. Same‑Layer Interaction
 
-```text
-enable
-```
+- Each layer communicates logically with the **same layer on the destination host**
 
-→ Enter Privileged EXEC mode
-
-```text
-configure terminal
-```
-
-→ Enter Global Configuration mode
-
-```text
-enable password <password>
-```
-
-→ Set basic enable password
-
-```text
-enable secret <password>
-```
-
-→ Set secure enable password
-
-```text
-service password-encryption
-```
-
-→ Encrypt passwords (Type 7)
-
-```text
-no <command>
-```
-
-→ Remove a configuration
-
-```text
-show running-config
-```
-
-→ View active configuration
-
-```text
-show startup-config
-```
-
-→ View saved configuration
-
-```text
-write / copy running-config startup-config
-```
-
-→ Save configuration
+### Addressing Summary
+| Layer | Address Used |
+|-----|-------------|
+| Application | Application protocol |
+| Transport | Port number |
+| Internet | IP address |
+| Local Network | MAC address |
+| Physical | Signal on medium |
 
 ---
 
-## 17. Final Review
+## 14. OSI Model (Comparison)
 
-* Console port provides **out-of-band access**
-* Rollover cable is required for console access
-* CLI modes control access and permissions
-* Always prefer **enable secret** over enable password
-* Configurations must be saved to survive reboot
+- Developed by **ISO** in late 1970s–1980s
+- 7‑layer model designed to replace TCP/IP
+- More complex and slower to deploy
+- TCP/IP won in real‑world usage
+
+### Why OSI Still Matters
+- Teaching and reference model
+- Common language for explaining networking
 
 ---
 
-✅ **End of Day 4 – CLI Basics**
+## 15. TCP/IP vs OSI Mapping
 
-```
-```
+| TCP/IP (5‑Layer) | OSI (7‑Layer) |
+|-----------------|--------------|
+| Application | Application / Presentation / Session |
+| Transport | Transport |
+| Internet | Network |
+| Local Network | Data Link |
+| Physical | Physical |
+
+> This is why the TCP/IP Application layer is often called **Layer 7**.
+
+---
+
+## 16. Final Review
+
+- TCP/IP is the foundation of the Internet
+- Layered models simplify complexity
+- Each layer has:
+  - A specific role
+  - Specific addressing
+- Understanding encapsulation, PDUs, and layer interaction is **critical for CCNA**
+
+---
+
+✅ **End of Day 3 – TCP/IP Model**
+
