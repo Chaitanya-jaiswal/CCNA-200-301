@@ -1,4 +1,3 @@
-````md
 # Day 4 – CLI Basics & Configuration (CCNA 200-301)
 
 ---
@@ -330,6 +329,3 @@ write / copy running-config startup-config
 ---
 
 ✅ **End of Day 4 – CLI Basics**
-
-```
-```
