@@ -1,6 +1,4 @@
-```md
 # Day 8 – IPv4 Addressing (Part 2)
-_CCNA 200-301_
 
 ---
 
