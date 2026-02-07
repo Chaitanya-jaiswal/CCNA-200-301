@@ -6,13 +6,13 @@
 
 ### Router – Cisco ASR 1000-X
 
-![Cisco ASR 1000-X Router](Cisco-ASR-Router.png)
+![Cisco ASR 1000-X Router](./images/Cisco-ASR-Router.png)
 
 Used as the Layer 3 device (default gateway) connecting different networks.
 
 ### Switch – Cisco Catalyst 9200
 
-![Cisco Catalyst 9200 Switch](Cisco-Catalyst-Switch.png)
+![Cisco Catalyst 9200 Switch](./images/Cisco-Catalyst-Switch.png)
 
 Used as the Layer 2 device to connect end devices and forward Ethernet frames.
 
@@ -152,13 +152,13 @@ Fa0/6  ## not in use ##  disabled  1  auto  auto  10/100BaseTX
 
 ### Collision Domain with Hub
 
-![Hub Collision Domain](Hub-Collision-Domain.png)
+![Hub Collision Domain](./images/Hub-Collision-Domain.png)
 
 All devices connected to a hub share **one collision domain**. Collisions are common.
 
 ### Collision Domains with Switch
 
-![Switch Collision Domain](Switch-Collision_Domain.png)
+![Switch Collision Domain](./images/Switch-Collision_Domain.png)
 
 Each switch port creates a **separate collision domain**, eliminating collisions in full-duplex mode.
 
@@ -201,7 +201,7 @@ Collision Domains
 
 ### Autonegotiation and Duplex Mismatch
 
-![Speed Duplex Autonegotiation](Speed-Duplex-Autonegotiation.png)
+![Speed Duplex Autonegotiation](./images/Speed-Duplex-Autonegotiation.png)
 
 Illustrates how duplex mismatches occur when one side uses manual configuration and the other uses autonegotiation.
 
@@ -266,7 +266,7 @@ SW1# show interfaces f0/2
 
 ## 8. Lab Topology Overview
 
-![Day 9 Network Topology](Network-Topology-of-Day-09-Switch-Interface-Configuration.png)
+![Day 9 Network Topology](./images/Network-Topology-of-Day-09-Switch-Interface-Configuration.png)
 
 This topology is used to demonstrate interface speed, duplex, collision domains, and error counters.
 
