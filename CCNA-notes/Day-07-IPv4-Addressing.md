@@ -2,7 +2,7 @@
 
 ## OSI Model – Network Layer (Layer 3)
 
-![OSI Network Layer](./images/osi-network-layer.png)
+<img src="./images/osi-network-layer.png" alt="OSI Network Layer" width="400">
 
 * Provides connectivity between end hosts on **different networks** (outside the LAN)
 * Provides **logical addressing** (IP addresses)
